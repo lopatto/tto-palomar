@@ -1,0 +1,78 @@
+version: v0.4
+
+project:
+  name: Schatten-class truncated Toeplitz operators
+  description: >-
+    Lean formalization of Schatten-class truncated Toeplitz operator results
+    from the local Lopatto–Rochberg manuscript. Includes analytic and coanalytic
+    Besov classifications for every real p>0, compactness and interpolation
+    criteria, splitting and polynomial-symbol results, and Hilbert–Schmidt
+    energy, differential and squared-kernel quotient descriptions.
+  authors: [Patrick Lopatto]
+  responsible_maintainers: [Patrick Lopatto]
+  license: Apache-2.0
+
+classification:
+  arxiv: [math.FA, math.CV]
+  msc2020: [47B35, 47B10, 30H10]
+
+sources:
+  - title: local manuscript
+    type: paper
+    authors: [Patrick Lopatto, Richard Rochberg]
+    relationship: formalizes
+    note: >-
+      Mathematical source, not distributed here. Its statements differ materially from the public arXiv version;
+      the scope and conditional refinement are disclosed in README.md.
+  - title: Schatten-class Truncated Toeplitz Operators
+    type: paper
+    authors: [Patrick Lopatto, Richard Rochberg]
+    id: arXiv:1410.1906v1
+    location: https://arxiv.org/abs/1410.1906v1
+    relationship: background
+    note: Public bibliographic version, distinct from the local manuscript.
+
+related_formalizations:
+  - id: https://github.com/TauCetiProject/TauCeti/tree/d7dad3786f4cb95dbc0b2f5a2e47a989c1ebadad
+    relationship: adapts
+    note: Narrow Apache-2.0 ports with original notices retained; not a Lake dependency.
+
+status:
+  scope: >-
+    Twelve advertised declarations cover local Theorems 1–9, Corollary 1,
+    the coanalytic Besov classification and the squared-kernel quotient.
+    No additional external mathematical hypotheses. Universal norm equality
+    and the concrete domain refinement in the last result retain the source
+    KernelGraphCore hypothesis; universal validity and the stronger universal
+    one-variable RKHS characterization are not claimed. Wider Sedlock/Crofoot
+    extensions, the cited thin-sequence characterization and the stronger
+    infinite-rank illustration, and separate logarithmic and two-atom
+    counterexamples are outside the advertised scope.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Quot.sound, Classical.choice]
+
+automation:
+  methods:
+    - method: agent
+      framework: OpenAI Codex
+      tool_setup: Lean, Lake, Mathlib, Lean Beam, and independent agent reviews
+  notes: >-
+    Maintainer-directed agents contributed substantial Lean code and proofs.
+    Independent agent statement and definition reviews supplement kernel checks.
+
+fidelity:
+  divergences: >-
+    Statements follow the local manuscript. Differences from the public paper
+    include all-p interpolation/basis criteria, scalar-compatible finite-atom
+    splitting, possibly nonzero atomic polynomial Hilbert–Schmidt operators,
+    and energy/domain statements with an explicit graph-core condition.
+    See README.md for scope and qualifications.
+
+review:
+  status: agent-reviewed
+  reviewers: [OpenAI Codex agents]
+  notes: >-
+    Independent agent review compared principal statements, central definitions
+    and coverage with the local manuscript and verified source records.
+    This is not a claim of external human review or Palomar approval.

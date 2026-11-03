@@ -1,0 +1,24 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "TTO.Paper.Proved.besovClassificationTheorem",
+    "TTO.Paper.Proved.compactClassificationTheorem",
+    "TTO.Paper.Proved.interpolatingClassificationTheorem",
+    "TTO.Paper.Proved.perturbedKernelBasisClassificationTheorem",
+    "TTO.Paper.Proved.gapSplittingTheorem",
+    "TTO.Paper.Proved.canonicalGapSplittingTheorem",
+    "TTO.Paper.Proved.finiteAtomClassificationTheorem",
+    "TTO.Paper.Proved.polynomialClassificationTheorem",
+    "TTO.Paper.Proved.hilbertSchmidtEnergyTheorem",
+    "TTO.Paper.Proved.differentialRealizationTheorem",
+    "TTO.Paper.Proved.coanalyticBesovTheorem",
+    "TTO.Paper.Proved.squaredKernelQuotientTheorem"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
