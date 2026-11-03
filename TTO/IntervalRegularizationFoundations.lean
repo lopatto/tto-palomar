@@ -149,8 +149,8 @@ theorem inner_unitaryConjugate_images {H K : Type*} [NormedAddCommGroup H]
   change inner ℂ (U b) (U (A (U.symm (U a))))=inner ℂ b (A a)
   rw [U.symm_apply_apply,U.inner_map_map]
 
-/-- The remaining operator identification is an explicit average-kernel pairing, not a splitting
-or scalar-limit premise. All bounded cuts, scalar asymptotics and dense-core glue are proved here. -/
+/-- Atomic regularization from an average-kernel pairing, using bounded cutoffs, scalar
+asymptotics and dense-core extension. -/
 theorem atomicRegularization_data_of_average_pairing (p τ : ℝ) (hp : 1 < p)
     (hτPos : 0 < τ) (hτ : TriangularConstant p τ)
     (u : BoundaryLInf) (hu : IsInner u) (hn : Nonconstant u)

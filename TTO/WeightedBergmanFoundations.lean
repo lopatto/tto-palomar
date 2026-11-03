@@ -216,7 +216,7 @@ theorem integrable_of_analytic_disk_lintegral_norm_lt_top (F : ℂ → ℂ)
   refine ⟨hM,?_⟩
   simpa only [hasFiniteIntegral_iff_enorm,← ofReal_norm] using hFin
 
-/-- The frozen p=1 Besov hypothesis supplies exactly the ordinary L¹ second derivative. -/
+/-- The p=1 Besov hypothesis supplies exactly the ordinary L¹ second derivative. -/
 theorem integrable_second_derivative_of_besov_one (g : BoundaryL2)
     (hg : besovEnergy 1 (analyticValue g) < ∞) :
     Integrable (deriv (deriv (analyticValue g))) diskArea := by
@@ -232,7 +232,7 @@ theorem second_derivative_weighted_moment_of_besov_one (g : BoundaryL2)
       conj (fourierCoeff g ((n+2 : ℕ) : ℤ)) :=
   second_derivative_weighted_moment g (integrable_second_derivative_of_besov_one g hg) n
 
-/-- Exact low-coefficient bookkeeping for the frozen inhomogeneous p=1 norm. -/
+/-- Exact low-coefficient bookkeeping for the inhomogeneous p=1 norm. -/
 theorem besovNorm_one_eq (g : BoundaryL2) (hg : besovEnergy 1 (analyticValue g)<∞) :
     besovNorm 1 g = ‖fourierCoeff g 0‖+‖fourierCoeff g 1‖+
       ∫ z, ‖deriv (deriv (analyticValue g)) z‖ ∂diskArea := by

@@ -6,7 +6,7 @@ Authors: Patrick Lopatto
 module
 public import TTO.WeakOperatorFoundations
 
-/-! Literal boundary meaning of the frozen polynomial symbols. -/
+/-! Literal boundary meaning of the polynomial symbols. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory Finset
@@ -14,7 +14,7 @@ open scoped ENNReal ComplexConjugate InnerProductSpace Topology
 namespace TTO.Paper.Proved
 open Reduction
 
-/-- The frozen Holder-recursive power is the ordinary pointwise power almost everywhere. -/
+/-- The Holder-recursive power is the ordinary pointwise power almost everywhere. -/
 theorem powerInf_ae (a : BoundaryLInf) (n : ℕ) :
     powerInf a n =ᵐ[circleMeasure] fun t => (a t)^n := by
   induction n with
@@ -58,7 +58,7 @@ theorem polynomialSymbol_ae (q : BiPolynomial) :
     intro jk _
     ring)))
 
-/-- The actual frozen polynomial-symbol meaning obligation, with no extra hypotheses. -/
+/-- The actual polynomial-symbol meaning obligation, with no extra hypotheses. -/
 theorem polynomialSymbolMeaning : PolynomialSymbolMeaning := polynomialSymbol_ae
 
 /-- T7 retains its full conclusion while supplying the actual polynomial-symbol meaning. -/

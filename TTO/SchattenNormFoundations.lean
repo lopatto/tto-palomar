@@ -10,7 +10,7 @@ public import TTO.FiniteCornerFoundations
 public import TTO.FinitePowerFoundations
 
 /-! Finite sorted Gram data for the sharp Schatten norm problem.
-The sharp triangle inequality and the frozen norm laws are proved below. -/
+The sharp triangle inequality and the norm laws are proved below. -/
 
 @[expose] public section
 noncomputable section
@@ -411,7 +411,7 @@ theorem schattenNorm_add_of_finite (hFin : FiniteSchattenTriangle) (p : ℝ) (hp
   exact (schatten_ball_weak_closed p hA.1 (schattenNorm p A+schattenNorm p B) C (A+B)
     (fun n => ⟨hCs n,hCB n⟩) hcoeff).2
 
-/-- The frozen sub-bound interface follows from a genuine finite-source proof obligation. -/
+/-- The Schatten norm laws follow from the finite-source triangle inequality. -/
 theorem schattenNormLaws_of_finite (hFin : FiniteSchattenTriangle) : SchattenNormLaws := by
   constructor
   intro H _ _ _ p A B hp hA hB
@@ -459,12 +459,12 @@ theorem schattenNorm_add_le_sharp {H : Type} [NormedAddCommGroup H]
     schattenNorm p (A+B) ≤ schattenNorm p A+schattenNorm p B :=
   schattenNorm_add_of_finite finiteSchattenTriangle p hp A B hA hB
 
-/-- L8 now has only its triangular-bound and raw regularization obligations left. -/
+/-- One-atom splitting from the triangular bound and regularization hypotheses. -/
 theorem oneAtomSplitting_of_triangular_regularization (hT : TriangularBoundObligation)
     (hR : AtomicRegularizationObligation) : OneAtomConclusion :=
   oneAtomSplitting_of_regularization_and_triangle hT hR schattenNormLaws
 
-/-- The full finite-atom reduction now supplies the proved sharp Schatten norm laws. -/
+/-- Finite-atom classification using the sharp Schatten norm laws. -/
 theorem finiteAtomClassification_of_corona_oneAtom (hCo : CoronaWitnessObligation)
     (hOne : OneAtomObligation) : FiniteAtomConclusion :=
   finiteAtomClassification_of_witness hCo hOne schattenNormLaws

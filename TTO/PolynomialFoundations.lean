@@ -9,7 +9,7 @@ public import TTO.MultiplierCompactFoundations
 public import TTO.TrigonometricFoundations
 public import TTO.PolynomialMeaningFoundations
 
-/-! Proved multiplier laws and the remaining explicit polynomial-model obligations. -/
+/-! Multiplier laws and reductions for polynomial models. -/
 @[expose] public section
 noncomputable section
 namespace TTO.Paper.Proved
@@ -24,7 +24,7 @@ theorem multiplicationLaws : MultiplicationLaws where
   multiplier_zero := fiberMultiplier_zero
   atomic_ae := atomicMeasure_ae_zero_iff
 
-/-- Full T7 now has only its actual pure model and positive atomic-witness obligations left. -/
+/-- Polynomial classification from pure-model representations and a positive atomic witness. -/
 theorem polynomialClassification_of_spectral_models (hP : PolynomialModels)
     (hQ : AtomicQuadraticWitness) : PolynomialConclusion :=
   polynomialClassification_of_models hP multiplicationLaws trigonometricUniqueness hQ

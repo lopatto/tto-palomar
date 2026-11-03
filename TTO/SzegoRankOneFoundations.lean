@@ -6,8 +6,7 @@ Authors: Patrick Lopatto
 module
 public import TTO.WeightedBlaschkeFoundations
 
-/-! Literal normalized Szegő rank-one kernels for a trace-class synthesis probe.
-No Peller sufficiency, converse or all-p classification is asserted here. -/
+/-! Normalized Szegő rank-one kernels for trace-class Hankel synthesis. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory Finset

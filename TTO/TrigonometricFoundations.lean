@@ -134,7 +134,7 @@ theorem singularRepresentation_measure_ne_zero (u : BoundaryLInf) (hu : IsInner 
   rw [hv', hα] at hi
   exact (lt_irrefl (1 : ℝ)) hi
 
-/-- The frozen T7 nonatomic trigonometric-uniqueness obligation, with no additional hypotheses. -/
+/-- The T7 nonatomic trigonometric-uniqueness obligation, with no additional hypotheses. -/
 theorem trigonometricUniqueness : TrigonometricUniqueness := by
   intro u hu hn μ hμ hnonatomic q
   constructor

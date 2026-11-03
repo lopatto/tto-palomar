@@ -154,7 +154,7 @@ theorem boundedAnalyticHardy_unimodular_of_norm_rpow
     exact (het n ⟨hn.1.le, hn.2⟩).symm
   exact tendsto_nhds_unique hxt.norm hxlim
 
-/-- An actual positive fractional singular-inner boundary factor with the frozen Taylor-L² meaning.
+/-- An actual positive fractional singular-inner boundary factor with the Taylor-L² meaning.
 The only mathematical premises are the given inner function and its manuscript representation. -/
 theorem exists_fractionalSingularBoundary (u : BoundaryLInf) (hu : IsInner u)
     (μ : Measure Boundary) (hμ : HasSingularRepresentation u μ) (r : ℝ) (hr : 0 < r) :

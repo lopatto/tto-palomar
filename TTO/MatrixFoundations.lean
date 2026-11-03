@@ -445,17 +445,19 @@ def actualMatrixData (u : BoundaryLInf) (hu : IsInner u) : MatrixData u where
   squareKernel_value := squaredModelKernel_value u hu
   reproduces η w := (inner_modelReproducingKernel (multiplyInf u u) (isInner_multiplyInf u u hu hu) w η).symm
 
-/-- The entire actual coefficient/tensor/kernel data obligation, with no unproved graph premise. -/
+/-- Coefficient, tensor and kernel data for the Hilbert–Schmidt criterion. -/
 theorem matrixData : MatrixDataObligation := fun u hu _hn => ⟨actualMatrixData u hu⟩
 
 end ConcreteMatrixData
 
-/-- Working T8 entry point after constructing the literal matrix/tensor/kernel data. -/
+/-- Hilbert–Schmidt energy criterion from the constructed matrix data and the stated
+boundary Parseval, graph-form and kernel coefficient hypotheses. -/
 theorem hilbertSchmidtEnergy_of_matrix (hP : BoundaryParsevalObligation)
     (hF : GraphFormObligation) (hTests : KernelCoefficientObligation) : HilbertSchmidtConclusion :=
   hilbertSchmidtEnergy_of_tensor matrixData hP hF hTests
 
-/-- Working T9 entry point after constructing the literal matrix/tensor/kernel data. -/
+/-- Differential realization from the constructed matrix data and the stated
+boundary Parseval, graph-form and kernel coefficient hypotheses. -/
 theorem differentialRealization_of_matrix (hP : BoundaryParsevalObligation)
     (hF : GraphFormObligation) (hTests : KernelCoefficientObligation) : DifferentialConclusion :=
   differentialRealization_of_tensor matrixData hP hF hTests
@@ -594,11 +596,11 @@ theorem kernelCoefficient : KernelCoefficientObligation := by
       _ = _ := hsquare.symm
   · exact hp.trans hval
 
-/-- Only exact boundary Parseval and natural closed-form/square-root theory remain for T8. -/
+/-- Hilbert–Schmidt energy criterion from boundary Parseval and closed graph-form theory. -/
 theorem hilbertSchmidtEnergy_of_kernels (hP : BoundaryParsevalObligation) (hF : GraphFormObligation) :
     HilbertSchmidtConclusion := hilbertSchmidtEnergy_of_matrix hP hF kernelCoefficient
 
-/-- The same two genuine internal obligations remain for the full T9 domain conclusion. -/
+/-- Differential realization, including its domain, from boundary Parseval and closed graph-form theory. -/
 theorem differentialRealization_of_kernels (hP : BoundaryParsevalObligation) (hF : GraphFormObligation) :
     DifferentialConclusion := differentialRealization_of_matrix hP hF kernelCoefficient
 

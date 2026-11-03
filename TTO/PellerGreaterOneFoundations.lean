@@ -6,7 +6,7 @@ Authors: Patrick Lopatto
 module
 public import TTO.HankelFirstColumnFoundations
 
-/-! Both frozen Besov formulations for the genuine classical Hankel theorem when p>1. -/
+/-! Both Besov formulations for the genuine classical Hankel theorem when p>1. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory

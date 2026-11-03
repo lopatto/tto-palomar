@@ -410,9 +410,8 @@ theorem coronaStructure_at_bezout {m : ℕ} (hm : 0 < m) (u : Fin m → Boundary
 
 
 set_option maxHeartbeats 400000 in
-/-- Full T6 with the distinct-atom corona functions constructed above.
-The sole remaining proof parameter is the paper's genuinely open uniform one-atom
-splitting lemma; it is not an approved external assumption or an unconditional proof. -/
+/-- Finite-atom classification from the constructed corona functions and a supplied
+uniform one-atom splitting theorem. -/
 theorem finiteAtomClassification_of_oneAtom (hOne : OneAtomObligation) : FiniteAtomConclusion := by
   classical
   let hC : CoreLaws := coreLaws

@@ -8,8 +8,7 @@ public import TTO.PolarCarlesonFoundations
 public import TTO.ArcLocalizationFoundations
 public import TTO.HardyWeightedEmbeddingReductionFoundations
 
-/-! Actual weighted polar measures and their application to the Hardy embedding.
-Uniform kernel box bounds remain an explicit internal proof obligation. -/
+/-! Weighted polar measures and the Hardy embedding criterion in terms of uniform kernel box bounds. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory
@@ -81,7 +80,7 @@ theorem measurable_polarKernelDensity (f : BoundaryL2) : Measurable (polarKernel
   exact ((measurable_const.sub (measurable_fst.pow_const 2)).mul
     (((measurable_diskCauchyKernel f).comp continuous_polarMap.measurable).norm.pow_const 2)).ennreal_ofReal
 
-/-- The actual measure whose dyadic boxes are the remaining local analytic estimate. -/
+/-- Weighted polar measure used in the dyadic box estimates. -/
 def weightedPolarMeasure (f : BoundaryL2) : Measure (ℝ × ℝ) :=
   realPolarBase.withDensity (polarKernelDensity f)
 
@@ -141,7 +140,7 @@ theorem weightedPolarMeasure_univ_le_oscillation (f : BoundaryL2) (B : ℝ) (hB 
   rw [weightedPolarMeasure_univ]
   exact cauchyWeightedHardyKernel_energy_le_oscillation f B hB hMO
 
-/-- The exact weighted Hardy integral in the frozen embedding is the actual polar-measure
+/-- The exact weighted Hardy integral in the embedding is the actual polar-measure
 Hardy integral. No boundedness of the Hardy vector is assumed. -/
 theorem weightedPolarMeasure_hardy_integral (f : BoundaryL2) (q : Hardy) :
     (∫⁻ p,ENNReal.ofReal (‖analyticValue q.val (polarMap p)‖^2) ∂weightedPolarMeasure f)=
@@ -176,8 +175,8 @@ theorem hardyWeightedEmbedding_of_polar_box (g : Hardy) (A : ℝ) (hA : 0≤A)
   have hs : (Real.sqrt (1310720*A))^2=1310720*A := Real.sq_sqrt (by positivity)
   simpa only [hs,mul_assoc,polarMap] using h
 
-/-- A uniform literal box estimate, when proved, discharges the complete frozen weighted
-oscillation embedding. This is internal logical glue, not an unconditional Hartman theorem. -/
+/-- A uniform box estimate implies the complete weighted
+oscillation embedding. -/
 theorem hardyWeightedOscillationEmbedding_of_polar_boxes (D : ℝ) (hD : 0<D)
     (hBox : ∀ (f : BoundaryL2) (B : ℝ),0≤B →
       (∀ a b : ℝ,a<b → b-a≤1 → meanOscillation f a b≤B) →

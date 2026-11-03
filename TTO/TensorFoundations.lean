@@ -111,7 +111,7 @@ theorem separatedProduct_memLp (f g : BoundaryL2) :
     ((Lp.memLp f).integrable_norm_pow (by norm_num : (2 : ℕ) ≠ 0)).mul_prod
       ((Lp.memLp g).integrable_norm_pow (by norm_num : (2 : ℕ) ≠ 0))
 
-/-- Concrete separated product in the frozen bidisk L² space. -/
+/-- Concrete separated product in the bidisk L² space. -/
 def separatedProduct (f g : BoundaryL2) : BidiskL2 :=
   (separatedProduct_memLp f g).toLp (fun p => f p.1*g p.2)
 
@@ -219,7 +219,7 @@ theorem separatedProduct_mem_of_basis {I J : Type*} (K L : Submodule ℂ Boundar
   intro t
   exact C.sum_mem (fun j _ => C.smul_mem _ (hfirst j))
 
-/-- The frozen positive bidisk mode is exactly the concrete separated Fourier product. -/
+/-- The positive bidisk mode is exactly the concrete separated Fourier product. -/
 theorem separatedProduct_fourierBasis (m n : ℕ) :
     separatedProduct (fourierBasis (T := 1) (m : ℤ)) (fourierBasis (T := 1) (n : ℤ)) =
       ContinuousMap.toLp 2 (circleMeasure.prod circleMeasure) ℂ (bidiskMode m n) := by
@@ -230,7 +230,7 @@ theorem separatedProduct_fourierBasis (m n : ℕ) :
   rw [hp,hc,hm,hn]
   rfl
 
-/-- Actual separated products of Hardy vectors belong to the frozen positive bidisk space. -/
+/-- Actual separated products of Hardy vectors belong to the positive bidisk space. -/
 theorem separatedProduct_mem_bidiskHardy (f g : Hardy) : separatedProduct f.val g.val ∈ bidiskHardy := by
   apply separatedProduct_mem_of_basis hardy hardy hardyBasis hardyBasis bidiskHardy
     (Submodule.isClosed_topologicalClosure _) (fun m n => ?_) f g
@@ -284,7 +284,7 @@ def bidiskHardyBasis : HilbertBasis (ℕ × ℕ) ℂ ↥bidiskHardy :=
 @[simp] theorem bidiskHardyBasis_apply (i : ℕ × ℕ) : bidiskHardyBasis i = bidiskHardyMode i :=
   congrFun (HilbertBasis.coe_mkOfOrthogonalEqBot bidiskHardyMode_orthonormal bidiskHardyModes_total) i
 
-/-- The frozen double Taylor series is the native bidisk reproducing pairing. -/
+/-- The double Taylor series is the native bidisk reproducing pairing. -/
 theorem analyticValue₂_eq_inner (G : ↥bidiskHardy) (z w : Disk) :
     analyticValue₂ G.val z.val w.val = inner ℂ (separatedProduct (szegoKernel z).val (szegoKernel w).val) G.val := by
   let k : ↥bidiskHardy := ⟨separatedProduct (szegoKernel z).val (szegoKernel w).val,
@@ -494,13 +494,14 @@ theorem tensor_section_criterion (u : BoundaryLInf) (G : BidiskL2) (hG : G ∈ b
   rw [he]
   exact T.property
 
-/-- The full source tensor-section obligation is proved on the unchanged concrete models. -/
+/-- Tensor-section criterion for the concrete model spaces. -/
 theorem tensorSection : TensorSectionObligation where
   tensor_hardy u _hu := tensorModel_le_bidiskHardy u
   sections u hu _hn η := FKernel_sections u hu η.val
   criterion u _hu G hG hfirst hsecond := tensor_section_criterion u G hG hfirst hsecond
 
-/-- Working T8 entry point with actual tensor sections supplied; four internal proof obligations remain. -/
+/-- Hilbert–Schmidt energy criterion from tensor sections, matrix data, boundary Parseval,
+graph-form theory and kernel coefficient identities. -/
 theorem hilbertSchmidtEnergy_of_tensor (hB : MatrixDataObligation) (hP : BoundaryParsevalObligation)
     (hF : GraphFormObligation) (hTests : KernelCoefficientObligation) : HilbertSchmidtConclusion :=
   hilbertSchmidtEnergy hB hP tensorSection hF hTests

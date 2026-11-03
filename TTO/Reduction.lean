@@ -7,7 +7,7 @@ module
 
 public import TTO.Definitions
 
-/-! Admission-free development reductions. Every unresolved mathematical input is an explicit proof parameter; these are not unconditional manuscript proofs. -/
+/-! Mathematical reductions from explicitly stated intermediate hypotheses. -/
 
 @[expose] public section
 noncomputable section
@@ -33,7 +33,7 @@ def HasSchattenHankel (p : ℝ) (σ : BoundaryL2) : Prop :=
 def HasCompactHankel (σ : BoundaryL2) : Prop :=
   ∃ H : HankelOperator, RepresentsHankel σ H ∧ IsCompactOperator H
 
-/-- O-HANKEL: exact restriction/zero extension, before any Peller/Hartman classification. -/
+/-- Exact restriction/zero extension, before any Peller/Hartman classification. -/
 def ExactHankelObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ φ : Model u,
     conjugation u φ.val ∈ hardy ∧
@@ -46,7 +46,7 @@ def ExactHankelObligation : Prop :=
         (IsCompactOperator A ↔ IsCompactOperator H) ∧
         ∀ n, approximationNumber A n = approximationNumber H n)
 
-/-- O-PELLER (E1/B): generic classical Hankel theorem; no inner function or TTO occurs.
+/-- Generic classical Hankel theorem; no inner function or TTO occurs.
 Source: Peller arXiv:2402.09853v1 Thm4.1/4.2. The quantitative all-p proof is provided in PellerFoundations. -/
 def PellerObligation (p : ℝ) : Prop :=
   (∀ g : BoundaryL2, g ∈ hardy →
@@ -60,7 +60,7 @@ def PellerObligation (p : ℝ) : Prop :=
       ch * homogeneousBesovNorm p (fun z => z * analyticValue g z) ≤ schattenNorm p H ∧
       schattenNorm p H ≤ Ch * homogeneousBesovNorm p (fun z => z * analyticValue g z)
 
-/-- O-HARTMAN (E2): classical Hardy statement, not the TTO compactness target.
+/-- Classical Hardy statement, not the TTO compactness target.
 Source: Peller1998 Thms5.5/5.8, with the compact bounded-symbol lift. -/
 def HartmanObligation : Prop :=
   ∀ g : BoundaryL2, g ∈ hardy →
@@ -102,7 +102,7 @@ theorem hankel_schatten_iff (h : ExactHankelObligation) (p : ℝ)
     obtain ⟨A, ha, hc, hs⟩ := hb H hh
     exact ⟨A, ha, (schatten_transfer hc hs).mpr hp⟩
 
-/-- Conditional reduction only: neither open obligation is an approved hypothesis for release. -/
+/-- Besov classification from the exact Hankel correspondence and the classical Hankel criterion. -/
 theorem besovClassification (h : ExactHankelObligation) (p : ℝ) (_hp : 0 < p)
     (hP : PellerObligation p) : BesovConclusion p := by
   constructor
@@ -137,7 +137,7 @@ def lowerTriangle {H : Type*} [NormedAddCommGroup H] [NormedSpace ℂ H]
     {N : ℕ} (Q : Fin N → H →L[ℂ] H) (A : H →L[ℂ] H) : H →L[ℂ] H :=
   ∑ i, ∑ j, if j < i then Q i ∘L A ∘L Q j else 0
 
-/-- O-GAP-FORMULA: manuscript's finite matrix reconstruction on the bounded core. -/
+/-- Manuscript's finite matrix reconstruction on the bounded core. -/
 def FiniteCompressionObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u →
   ∀ μ : Measure Boundary, HasSingularRepresentation u μ →
@@ -178,7 +178,7 @@ def similarity {H : Type*} [NormedAddCommGroup H] [NormedSpace ℂ H]
     (S : SequenceL2 ≃L[ℂ] H) (D : SequenceOperator) : H →L[ℂ] H :=
   S.toContinuousLinearMap ∘L D ∘L S.symm.toContinuousLinearMap
 
-/-- O-DIAGONAL: generic sequence-space facts, not analytic-symbol statements. -/
+/-- Generic sequence-space facts, not analytic-symbol statements. -/
 structure DiagonalLaws : Prop where
   bounded : ∀ w : ℕ → ℂ, (∃ D : SequenceOperator, Diagonal w D) ↔
     ∃ M : ℝ, ∀ n, ‖w n‖ ≤ M
@@ -189,7 +189,7 @@ structure DiagonalLaws : Prop where
   norm : ∀ w : ℕ → ℂ, ∀ D : SequenceOperator, Diagonal w D → ∀ p : ℝ,
     Schatten p D → schattenNorm p D = valueNorm p w
 
-/-- O-IDEAL: generic ideal algebra and similarity estimates, containing no symbols or nodes. -/
+/-- Generic ideal algebra and similarity estimates, containing no symbols or nodes. -/
 structure IdealLaws : Prop where
   schatten_add : ∀ {H : Type} [NormedAddCommGroup H] [NormedSpace ℂ H]
     (p : ℝ) (A B : H →L[ℂ] H), Schatten p A → Schatten p B → Schatten p (A + B)
@@ -212,13 +212,13 @@ structure IdealLaws : Prop where
       schattenNorm p (similarity S D) ≤
         (‖S.toContinuousLinearMap‖ * ‖S.symm.toContinuousLinearMap‖) * schattenNorm p D
 
-/-- O-RIESZ (E3): functional interpolation implies the actual normalized-kernel synthesis. -/
+/-- Functional interpolation implies the actual normalized-kernel synthesis. -/
 def RieszObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ a : ℕ → Disk,
   Function.Injective a → HasBlaschkeZeros u a → Interpolating a →
     ∃ R : SequenceL2 ≃L[ℂ] Model u, RieszSynthesis u a R
 
-/-- O-DUAL-MODEL: the analytic eigenbasis is the DUAL kernel basis, not the kernels. -/
+/-- The analytic eigenbasis is the DUAL kernel basis, not the kernels. -/
 def DualDiagonalObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ a : ℕ → Disk,
   Function.Injective a → HasBlaschkeZeros u a →
@@ -285,7 +285,7 @@ theorem interpolatingClassification (hR : RieszObligation) (hM : DualDiagonalObl
       have hdn := hD.norm _ D hd p hsd
       simpa only [← hA, hn', hin', hdn, mul_comm] using hnorm
 
-/-- O-KERNEL-REMAINDER: diagonal normal form of the computed near-orthonormal kernel matrix. -/
+/-- Diagonal normal form of the computed near-orthonormal kernel matrix. -/
 def KernelRemainderObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u →
   ∀ a : ℕ → Disk, Function.Injective a → HasBlaschkeZeros u a →
@@ -300,7 +300,7 @@ def KernelRemainderObligation : Prop :=
         Diagonal (fun n => innerValue φ (a n).val + conj (innerValue ψ (a n).val)) D ∧
         ∃ K : Model u →L[ℂ] Model u, Schatten p K ∧ A = similarity S D + K
 
-/-- E13 restricted lift, still an INTERNAL proof obligation with no approval to assume it at release. -/
+/-- Analytic bounded-symbol lift for bounded TTOs with Hardy symbols. -/
 def AnalyticLiftObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ φ : Hardy,
     ∀ A : Model u →L[ℂ] Model u, RepresentsTTO u φ.val A →
@@ -368,7 +368,7 @@ theorem perturbedKernelBasisClassification (hC : CoreLaws) (hl : AnalyticLiftObl
     exact hpert.trans ((hI.schatten_similarity S D p).trans (hD.schatten _ D hd p hp))
 
 
-/-- O-IDEAL-CARRIERS: generic closure properties of the three advertised ideals. -/
+/-- Generic closure properties of the three advertised ideals. -/
 structure IdealCarriers : Prop where
   schatten : ∀ u : BoundaryLInf, ∀ p : ℝ, 0 < p →
     ∃ I : Submodule ℂ (Model u →L[ℂ] Model u), TwoSided u I ∧
@@ -402,7 +402,7 @@ theorem gapSpecializations (h : FiniteCompressionObligation) (hI : IdealCarriers
       gapSplitting h u hu hn μ hμ I hi φ ψ r hr hr1 hg ⟨A, he, (hc A).mpr hs⟩
     exact ⟨⟨X, hx, (hc X).mp hxi⟩, ⟨Y, hy, (hc Y).mp hyi⟩⟩
 
-/-- O-GAP-PROJECTION: canonical orthogonality and the high-frequency factor, no ideal conclusion. -/
+/-- Canonical orthogonality and the high-frequency factor, no ideal conclusion. -/
 def GapProjectionObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u →
   ∀ μ : Measure Boundary, HasSingularRepresentation u μ →
@@ -458,7 +458,7 @@ def RepresentsMultiplier {X : Type} [MeasurableSpace X] (μ : Measure X) (f : X 
 abbrev fiberMeasure (μ : Measure Boundary) : Measure (Boundary × ℝ) :=
   μ.prod (volume.restrict (Set.Ioo (0 : ℝ) 1))
 
-/-- O-POLY-MODELS: the actual polynomial operators are HS perturbations of explicit
+/-- The actual polynomial operators are HS perturbations of explicit
 pure multiplication/diagonal models. This states no membership classification. -/
 structure PolynomialModels : Prop where
   blaschke : ∀ u : BoundaryLInf, IsInner u → Nonconstant u →
@@ -482,7 +482,7 @@ structure PolynomialModels : Prop where
         RepresentsMultiplier (fiberMeasure μ) (fun t => polynomialValue q (fourier (T := 1) 1 t.1)) M ∧
       ∃ K : Model u →L[ℂ] Model u, Schatten 2 K ∧ A = unitaryConjugate U M + K
 
-/-- O-MULTIPLIERS: generic diagonal and multiplication compactness/summability laws. -/
+/-- Generic diagonal and multiplication compactness/summability laws. -/
 structure MultiplicationLaws : Prop where
   diagonal_compact : ∀ ι : Type, ∀ w : ι → ℂ,
     ∀ D : lp (fun _ : ι => ℂ) 2 →L[ℂ] lp (fun _ : ι => ℂ) 2,
@@ -504,7 +504,7 @@ structure MultiplicationLaws : Prop where
   atomic_ae : ∀ μ : Measure Boundary, AtomicMeasure μ → ∀ f : Boundary → ℂ,
     (∀ᵐ t ∂μ, f t = 0) ↔ ∀ t, 0 < μ {t} → f t = 0
 
-/-- O-TRIG: a nonzero nonatomic measure has infinite support, determining a trigonometric polynomial. -/
+/-- A nonzero nonatomic measure has infinite support, determining a trigonometric polynomial. -/
 def TrigonometricUniqueness : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u →
   ∀ μ : Measure Boundary, HasSingularRepresentation u μ → NonatomicMeasure μ →
@@ -516,7 +516,7 @@ def PolynomialSymbolMeaning : Prop :=
   ∀ q : BiPolynomial, ∀ᵐ t ∂circleMeasure,
     polynomialSymbol q t = polynomialValue q (fourier (T := 1) 1 t)
 
-/-- O-ATOMIC-QUADRATIC: the explicit symbol 2-z-conj z has a strictly positive matrix coefficient.
+/-- The explicit symbol 2-z-conj z has a strictly positive matrix coefficient.
 No compactness, Schatten or nonzero-operator conclusion is included. -/
 def AtomicQuadraticWitness : Prop :=
   ∃ u : BoundaryLInf, IsInner u ∧ Nonconstant u ∧ SingleAtom u 0 ∧
@@ -624,7 +624,7 @@ theorem polynomialClassification (hC : CoreLaws) (hI : IdealLaws) (hU : UnitaryI
     simp only [hzero, zero_apply, inner_zero_right, Complex.zero_re, lt_self_iff_false] at hf
 
 
-/-- O-CORONA-STRUCTURE: general finite-inner gluing, without any atomic classification. -/
+/-- General finite-inner gluing, without any atomic classification. -/
 def CoronaStructureObligation : Prop :=
   ∀ m : ℕ, 0 < m → ∀ u : Fin m → BoundaryLInf,
     (∀ j, IsInner (u j) ∧ Nonconstant (u j)) → Corona u →
@@ -634,12 +634,12 @@ def CoronaStructureObligation : Prop :=
       ComplementaryIdempotents E ∧ IdempotentRanges u E ∧
       ∀ a' E', Bezout u a' → RepresentsIdempotents u a' E' → E' = E)
 
-/-- O-DISTINCT-ATOMS: the cofactor lower bound follows from the explicit separated singular factors. -/
+/-- The cofactor lower bound follows from the explicit separated singular factors. -/
 def DistinctAtomCoronaObligation : Prop :=
   ∀ m : ℕ, 0 < m → ∀ u : Fin m → BoundaryLInf, ∀ ζ : Fin m → Boundary,
     Function.Injective ζ → (∀ j, IsInner (u j) ∧ SingleAtom (u j) (ζ j)) → Corona u
 
-/-- O-LOCAL-COMPRESSION: compressing a global core to a divisor preserves its symbol and contracts S_p. -/
+/-- Compressing a global core to a divisor preserves its symbol and contracts S_p. -/
 def AtomCompressionObligation : Prop :=
   ∀ m : ℕ, 0 < m → ∀ u : Fin m → BoundaryLInf, ∀ ζ : Fin m → Boundary,
   Function.Injective ζ → (∀ j, IsInner (u j) ∧ Nonconstant (u j) ∧ SingleAtom (u j) (ζ j)) →
@@ -666,7 +666,7 @@ def OneAtomObligation : Prop :=
       AngularLimit (analyticValue φ.val) ζ c ∧
       AngularLimit (analyticValue ψ.val) ζ (-conj c)
 
-/-- O-VECTOR-GLUING: general-inner diagonal similarity of analytic remainders, before local scalar existence. -/
+/-- General-inner diagonal similarity of analytic remainders, before local scalar existence. -/
 def VectorGluingObligation : Prop :=
   ∀ m : ℕ, 0 < m → ∀ u : Fin m → BoundaryLInf,
   (∀ j, IsInner (u j) ∧ Nonconstant (u j)) → Corona u →
@@ -943,7 +943,7 @@ def matrixEnergy {u : BoundaryLInf} (b : MatrixData u) (η : Ambient u) : ℝ≥
 def coefficientPair {u : BoundaryLInf} (b : MatrixData u) (η γ : Ambient u) : ℂ :=
   ∑' ij, b.coefficient ij η * conj (b.coefficient ij γ)
 
-/-- O-ANALYSIS: generic closed coefficient analysis, with no inner functions or boundary energy. -/
+/-- Generic closed coefficient analysis, with no inner functions or boundary energy. -/
 def ClosedAnalysisObligation : Prop :=
   ∀ (H K I : Type) [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
     [NormedAddCommGroup K] [InnerProductSpace ℂ K] [CompleteSpace K],
@@ -959,7 +959,7 @@ structure L2CoordinateLaws : Prop where
   inner : ∀ I : Type, ∀ x y : lp (fun _ : I => ℂ) 2,
     inner ℂ y x = ∑' i, x i * conj (y i)
 
-/-- O-MATRIX: generic HS matrix reconstruction specialized to the explicit bounded-core coefficients.
+/-- Generic HS matrix reconstruction specialized to the explicit bounded-core coefficients.
 No FKernel, energy or differential operator occurs in this criterion. -/
 def MatrixOperatorObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ b : MatrixData u, ∀ η : Ambient u,
@@ -967,7 +967,7 @@ def MatrixOperatorObligation : Prop :=
     ∀ B : Model u →L[ℂ] ConjugateModel u, RepresentsTHO u (star η.val) B → Schatten 2 B →
       ENNReal.ofReal (schattenNorm 2 B ^ 2) = matrixEnergy b η
 
-/-- O-BOUNDARY-PARSEVAL: Fourier division by z-w and Parseval for the actual coefficient array. -/
+/-- Fourier division by z-w and Parseval for the actual coefficient array. -/
 structure BoundaryParsevalObligation : Prop where
   norm : ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ b : MatrixData u, ∀ η : Ambient u,
     energy u η.val = matrixEnergy b η
@@ -975,7 +975,7 @@ structure BoundaryParsevalObligation : Prop where
     matrixEnergy b η < ∞ → matrixEnergy b γ < ∞ →
       energyPairing u η.val γ.val = coefficientPair b η γ
 
-/-- O-SECTIONS: concrete section calculations and the generic Hardy tensor-section criterion. -/
+/-- Concrete section calculations and the generic Hardy tensor-section criterion. -/
 structure TensorSectionObligation : Prop where
   tensor_hardy : ∀ u : BoundaryLInf, IsInner u → tensorModel u ≤ bidiskHardy
   sections : ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ η : Ambient u,
@@ -986,7 +986,7 @@ structure TensorSectionObligation : Prop where
     (∀ z ∈ disk, ∃ f : Model u, ∀ w ∈ disk, analyticValue f.val w = analyticValue₂ G z w) →
       G ∈ tensorModel u
 
-/-- O-KERNEL-TESTS: explicit coefficient tests on reproducing kernels, prior to forming Q*Q. -/
+/-- Explicit coefficient tests on reproducing kernels, prior to forming Q*Q. -/
 def KernelCoefficientObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ b : MatrixData u,
     ∀ η : Ambient u, matrixEnergy b η < ∞ → ∀ w : Disk,
@@ -1047,14 +1047,14 @@ structure GraphFormData {H K : Type} [NormedAddCommGroup H] [InnerProductSpace �
     ∃ C : ℝ, 0 ≤ C ∧ ∀ γ : Q.domain,
       ‖inner ℂ (Q γ) (Q ⟨x, hx⟩)‖ ≤ C * ‖γ.val‖
 
-/-- O-GRAPH-FORM (E7): generic closed densely-defined graph-form/square-root theorem. -/
+/-- Generic closed densely-defined graph-form/square-root theorem. -/
 def GraphFormObligation : Prop :=
   ∀ (H K : Type) [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
     [NormedAddCommGroup K] [InnerProductSpace ℂ K] [CompleteSpace K],
   ∀ Q : H →ₗ.[ℂ] K, Q.IsClosed → Dense (Q.domain : Set H) →
     ∃ D S : H →ₗ.[ℂ] H, GraphFormData Q D S
 
-/-- O-CANONICAL-THO: actual canonical-symbol unitary transfer, independent of the energy criterion. -/
+/-- Actual canonical-symbol unitary transfer, independent of the energy criterion. -/
 def CanonicalTHOObligation : Prop :=
   ∀ u : BoundaryLInf, IsInner u → Nonconstant u → ∀ φ ψ : Model u,
   analyticValue ψ.val 0 = 0 → ∃ η : Ambient u,

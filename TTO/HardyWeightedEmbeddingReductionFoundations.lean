@@ -230,14 +230,14 @@ theorem finite_hardy_l1_bound_of_weighted_embedding (g : Hardy) (A : ℝ) (hA : 
   rw [← nativeL1_norm_polynomialBoundary,polynomialBoundary_finiteHardyPolynomial] at h
   exact h
 
-/-- The complete universal weighted embedding still to be proved from literal arc oscillation.
-This is an internal proof target, not an approved external assumption. -/
+/-- Universal weighted Hardy embedding controlled by arc mean oscillation.
+Proved in PolarBoxEstimatesFoundations. -/
 def HardyWeightedOscillationEmbedding : Prop :=
   ∃ C : ℝ,0<C ∧ ∀ g : Hardy,∀ B : ℝ,0≤B →
     (∀ a b : ℝ,a<b → b-a≤1 → meanOscillation g.val a b≤B) →
       HardyWeightedEmbedding g (C*B)
 
-/-- The analytic embedding gives the exact earlier finite-Hardy L¹ proof obligation. -/
+/-- The weighted analytic embedding implies the finite-Hardy L¹ pairing estimate. -/
 theorem finiteHardyL1OscillationEstimate_of_weighted_embedding
     (hEmbedding : HardyWeightedOscillationEmbedding) : FiniteHardyL1OscillationEstimate := by
   obtain ⟨C,hC,hEmbedding⟩ := hEmbedding
@@ -250,7 +250,7 @@ theorem finiteHardyL1OscillationEstimate_of_weighted_embedding
   have hn : 0≤‖fourierCoeff g.val 0‖ := norm_nonneg _
   nlinarith [mul_nonneg hC.le hn]
 
-/-- Conditional internal Hartman reduction; the substantial embedding remains explicit. -/
+/-- Hartman criterion from the weighted oscillation embedding hypothesis. -/
 theorem hartmanObligation_of_weighted_oscillation_embedding
     (hEmbedding : HardyWeightedOscillationEmbedding) : HartmanObligation :=
   hartmanObligation_of_finiteHardyL1OscillationEstimate

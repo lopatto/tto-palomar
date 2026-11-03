@@ -387,7 +387,7 @@ theorem operatorBlock_cut (Q : Fin N → H →L[ℂ] H) (hQ : TriangularBlocks Q
   rw [triangularCut_eq_multiplier]
   exact operatorBlock_multiplier Q hQ _ A i j
 
-/-- The signed transform is exactly strict lower minus strict upper, with literal frozen cuts. -/
+/-- The signed transform is exactly strict lower minus strict upper, with literal cuts. -/
 theorem triangularHilbert_eq_cut_sub_adjoint
     (Q : Fin N → H →L[ℂ] H) (hQ : TriangularBlocks Q) (A : H →L[ℂ] H) :
     triangularHilbert Q A=triangularCut Q A-(triangularCut Q A.adjoint).adjoint := by
@@ -1088,7 +1088,7 @@ section StrictCutConversion
 variable {H : Type} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H]
 variable {N : ℕ}
 
-/-- Recover the literal frozen strictly lower cut from the identity, pinching and signed transform. -/
+/-- Recover the literal strictly lower cut from the identity, pinching and signed transform. -/
 theorem triangularCut_eq_half (Q : Fin N → H →L[ℂ] H) (hQ : TriangularBlocks Q)
     (A : H →L[ℂ] H) :
     triangularCut Q A=(1/2 : ℂ) • (A-blockPinching Q A+triangularHilbert Q A) := by

@@ -52,7 +52,7 @@ theorem blaschkeBoundary_hardy (a : Disk) : toL2 (blaschkeBoundary a) ∈ hardy 
     (multiply_mem_hardy coordinate coordinate_isInner.1 _ (szegoKernel a).property)
     (hardy.smul_mem _ (szegoKernel a).property))
 
-/-- Its literal analytic evaluation is the frozen normalized Blaschke factor, including a=0. -/
+/-- Its literal analytic evaluation is the normalized Blaschke factor, including a=0. -/
 theorem innerValue_blaschkeBoundary (a z : Disk) :
     innerValue (blaschkeBoundary a) z.val = blaschkeFactor a z.val := by
   unfold innerValue
@@ -97,7 +97,7 @@ theorem hardy_divide_blaschkeBoundary (a : Disk) (f : Hardy)
     exact (hq ⟨z,hz⟩).symm
   exact congrArg Subtype.val he
 
-/-- The actual finite prefix, with the frozen normalization of each factor. -/
+/-- The actual finite prefix, with the normalization of each factor. -/
 def blaschkePrefix (a : ℕ → Disk) : ℕ → BoundaryLInf
   | 0 => constLInf 1
   | n+1 => multiplyInf (blaschkePrefix a n) (blaschkeBoundary (a n))
@@ -698,8 +698,7 @@ theorem hasBlaschkeZeros_relabel {ι κ : Type} (u : BoundaryLInf) (a : ι → D
     congr 1
     exact (e.tprod_eq (fun i => blaschkeFactor (a i) z)).symm
 
-/-- A Hilbert basis with the sharp residual column bound exists for the FULL frozen
-countable-index Blaschke scope, including finite/empty lists and repeated zeros. -/
+/-- A Hilbert basis with the sharp residual column bound exists for countable-index Blaschke models, including finite/empty lists and repeated zeros. -/
 theorem exists_blaschke_model_basis (u : BoundaryLInf) (hu : IsInner u) {ι : Type}
     (a : ι → Disk) (hc : Countable ι) (hz : HasBlaschkeZeros u a) :
     ∃ b : HilbertBasis ι ℂ (Model u), ∀ i,
@@ -904,7 +903,7 @@ theorem norm_polynomialValue_sub_le_on_unit (q : BiPolynomial) {z w : ℂ}
       exact mul_le_mul_of_nonneg_left (norm_bimonomial_sub_le_on_unit hz hw _ _) (norm_nonneg _)
     _ = _ := by ring
 
-/-- The literal L∞ polynomial already used in the frozen polynomialSymbol definition. -/
+/-- The literal L∞ polynomial already used in the polynomialSymbol definition. -/
 def biPolynomialBoundary (q : BiPolynomial) : BoundaryLInf :=
   q.sum (fun jk c => c • multiplyInf (powerInf coordinate jk.1) (powerInf (star coordinate) jk.2))
 
@@ -973,7 +972,7 @@ theorem polynomialNodeDiagonal_conjugate_basis {ι : Type} (u : BoundaryLInf) (q
   change b.repr.symm (polynomialNodeDiagonal q a (b.repr (b i))) = _
   rw [b.repr_self,polynomialNodeDiagonal_isDiagonal,map_smul,b.repr_symm_single]
 
-/-- The full frozen pure-Blaschke polynomial model, proved by literal Lipschitz columns
+/-- The full pure-Blaschke polynomial model, proved by literal Lipschitz columns
 rather than identifying mixed symbols with noncommuting polynomials in the compressed shift. -/
 theorem polynomialBlaschkeModel :
     ∀ u : BoundaryLInf, IsInner u → Nonconstant u →

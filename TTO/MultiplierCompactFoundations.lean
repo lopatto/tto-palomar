@@ -236,7 +236,7 @@ theorem compact_representedMultiplier_iff_zero (f : X → ℂ)
 end CompactMultipliers
 
 
-/-- The exact nonatomic compact-multiplier field, with only the frozen measure hypotheses. -/
+/-- The exact nonatomic compact-multiplier field, with only the measure hypotheses. -/
 theorem nonatomic_multiplier_compact_iff (μ : Measure Boundary) (hμ : μ Set.univ < ∞)
     (hn : NonatomicMeasure μ) (f : Boundary → ℂ) (M : Lp ℂ 2 μ →L[ℂ] Lp ℂ 2 μ)
     (hM : RepresentsMultiplier μ f M) : IsCompactOperator M ↔ ∀ᵐ x ∂μ, f x = 0 := by

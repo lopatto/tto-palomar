@@ -112,7 +112,7 @@ theorem gapSynthesis_single (u v : BoundaryLInf) (N : ℕ)
     exact (hj (Finset.mem_univ j)).elim
 
 /-- Finite strict-lower reconstruction on an actual orthogonal power decomposition.
-The proof is first on the dense image of bounded tuples, then extends to the entire frozen core. -/
+The proof is first on the dense image of bounded tuples, then extends to the entire core. -/
 theorem finiteGap_reconstruction (u v : BoundaryLInf) (hv : IsInner v) (N : ℕ)
     (W : FiniteModelSum (fun _ : Fin N => v) ≃ₗᵢ[ℂ] Model u)
     (hW : ∀ f, (W f).val = ∑ j, multiply (powerInf v j.val) (f j).val)

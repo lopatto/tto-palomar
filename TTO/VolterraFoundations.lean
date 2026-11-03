@@ -156,7 +156,7 @@ theorem volterraRaw_interval (ℓ : ℝ) (f : IntervalL2 ℓ) (t : ℝ) (ht : t 
     · exact fun h => ⟨h.2, h.1, h.2.trans ht⟩
   rw [hset]
 
-/-- The bounded linear map has precisely the frozen Volterra meaning. -/
+/-- The bounded linear map has precisely the Volterra meaning. -/
 theorem volterraOperator_represents (ℓ : ℝ) : RepresentsVolterra ℓ (volterraOperator ℓ) := by
   intro f
   filter_upwards [volterraOperator_ae ℓ f, ae_restrict_mem measurableSet_Ioo] with t ht hm

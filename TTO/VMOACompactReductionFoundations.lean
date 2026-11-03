@@ -22,7 +22,7 @@ open Reduction
 local instance vmoaReductionHankelNormed : NormedAddCommGroup HankelOperator := inferInstance
 local instance vmoaReductionHankelSpace : NormedSpace ℂ HankelOperator := inferInstance
 
-/-- The genuine universal quantitative Hardy L¹ pairing estimate still to be proved.
+/-- Universal quantitative Hardy L¹ pairing estimate.
 The constant coefficient is explicit; oscillation alone cannot detect constants. -/
 def FiniteHardyL1OscillationEstimate : Prop :=
   ∃ C : ℝ, 0<C ∧ ∀ g : Hardy, ∀ B : ℝ, 0≤B →

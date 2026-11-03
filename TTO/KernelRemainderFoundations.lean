@@ -166,7 +166,7 @@ theorem kernelRemainder : KernelRemainderObligation := by
       ((hmem Γ).mpr hΓ) ((hmem Γ.adjoint).mpr ((schatten_adjoint_iff Γ p).mpr hΓ)) hnode
     exact ⟨S,D,hd,K,(hmem K).mp hK,he⟩
 
-/-- Full working T4 now requires only its independently stated analytic bounded-symbol lift. -/
+/-- Interpolating-symbol classification from an analytic bounded-symbol lift. -/
 theorem perturbedKernelBasisClassification_of_lift (hL : AnalyticLiftObligation) : PerturbedBasisConclusion :=
   perturbedKernelBasisClassification hL kernelRemainder
 
@@ -283,7 +283,7 @@ theorem hardy_interpolate_of_riesz (u : BoundaryLInf) (a : ℕ → Disk) (hz : H
   rw [inner_nodeKernel (a n) _ (hR n) ⟨f.val,f.property.1⟩] at hpair
   exact mul_left_cancel₀ (Complex.ofReal_ne_zero.mpr (ne_of_gt (Real.sqrt_pos.mpr (hdef n)))) hpair
 
-/-- Conditional helper only: the still-open bounded analytic lift converts actual Riesz interpolation to H∞ interpolation. -/
+/-- H∞ interpolation from Riesz synthesis and an analytic-lift hypothesis. -/
 theorem interpolating_of_riesz_and_lift (hL : AnalyticLiftObligation)
     (u : BoundaryLInf) (hu : IsInner u) (hn : Nonconstant u) (a : ℕ → Disk)
     (hi : Function.Injective a) (hz : HasBlaschkeZeros u a)
@@ -385,7 +385,7 @@ theorem alternatingDivergence : AlternatingDivergenceObligation := by
   have hc' : 1-c=0 := tendsto_nhds_unique tendsto_const_nhds ho'
   norm_num [hc] at hc'
 
-/-- Both T4 and the full R5 splitting statement now have only the same analytic-lift proof input. -/
+/-- Interpolating classification and symbol splitting from an analytic-lift hypothesis. -/
 theorem blaschkeSplitting_of_lift (hL : AnalyticLiftObligation) : BlaschkeSplittingConclusion :=
   Reduction.blaschkeSplitting (perturbedKernelBasisClassification_of_lift hL) coreLaws scalarSplit
     shiftSymbolLaws (alternatingInterpolation_of_lift hL) alternatingDivergence

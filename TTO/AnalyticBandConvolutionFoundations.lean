@@ -41,7 +41,7 @@ theorem analyticWideBandPolynomial_coeff (m N N' : ℕ) (F : ℂ → ℂ) (k : �
       (wideDirichletPositiveWeight m N' k-wideDirichletPositiveWeight m N k)*diskTaylorCoeff F k := by
   rw [analyticWideBandPolynomial,analyticCoefficientMultiplier_coeff,positiveWideBandKernel_coeff]
 
-/-- The finite Taylor band of the frozen analyticValue uses exactly g's positive Fourier coefficients. -/
+/-- The finite Taylor band of analyticValue uses exactly g's positive Fourier coefficients. -/
 theorem analyticWideBandPolynomial_analyticValue_coeff (m N N' : ℕ) (g : BoundaryL2) (k : ℕ) :
     (analyticWideBandPolynomial m N N' (analyticValue g)).coeff k =
       (wideDirichletPositiveWeight m N' k-wideDirichletPositiveWeight m N k)*fourierCoeff g (k : ℤ) := by

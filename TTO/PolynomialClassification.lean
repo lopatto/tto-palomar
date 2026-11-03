@@ -64,7 +64,7 @@ theorem continuousSingularPolynomialClassification :
     (trigonometricUniqueness u hu hn μ hμ ha q)
   exact ⟨hc, fun hcompact A hA => polynomial_circle_zero_operator u hu hn q (hc.mp hcompact) A hA⟩
 
-/-- Theorem 7 in its full frozen scope: all pure types, countable zero multiplicities, p≥2
+/-- Theorem 7 in its full scope: all pure types, countable zero multiplicities, p≥2
 in the Blaschke Schatten clause, and the actual nonzero atomic S₂ example. -/
 theorem polynomialClassificationTheorem : PolynomialConclusion := by
   refine ⟨blaschkePolynomialClassification, ?_, atomicPolynomialClassification,

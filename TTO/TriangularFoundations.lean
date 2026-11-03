@@ -151,7 +151,7 @@ theorem triangularCut_columnEnergy_le {I : Type*} (b : HilbertBasis I ℂ H) {N 
     _ = columnEnergy (∑ i, C i) b := (columnEnergy_sum_of_orthogonal b C hC).symm
     _ = columnEnergy A b := by rw [hCs]
 
-/-- The exact p=2 base case of the frozen uniform triangular bound, on arbitrary Hilbert space. -/
+/-- The exact p=2 base case of the uniform triangular bound, on arbitrary Hilbert space. -/
 theorem triangularConstant_two : TriangularConstant (2 : ℝ) 1 := by
   intro H _ _ _ N Q hsum hQ horth A hA
   obtain ⟨I,b,_⟩ := exists_hilbertBasis ℂ H

@@ -46,7 +46,7 @@ theorem convexOn_meanOscillation (a b : ℝ) (hab : a<b) (hLen : b-a≤1) :
     Complex.norm_real,Complex.norm_real,Real.norm_of_nonneg hr,Real.norm_of_nonneg hs] at h
   exact h
 
-/-- Jensen's inequality for actual L²-valued Bochner averaging and the frozen arc formula. -/
+/-- Jensen's inequality for actual L²-valued Bochner averaging and the arc formula. -/
 theorem meanOscillation_integral_le {α : Type*} [MeasurableSpace α]
     (μ : Measure α) [IsProbabilityMeasure μ] (F : α → BoundaryL2)
     (a b : ℝ) (hab : a<b) (hLen : b-a≤1)

@@ -54,7 +54,7 @@ theorem analytic_disk_area_parseval (F : ℂ → ℂ) (hF : AnalyticOnNhd ℂ F 
           congr 1
           ring
 
-/-- The actual complex derivative area energy of the frozen analytic extension. -/
+/-- The actual complex derivative area energy of the analytic extension. -/
 theorem analyticValue_deriv_disk_area (f : BoundaryL2) :
     (∫⁻ z, ENNReal.ofReal (‖deriv (analyticValue f) z‖^2) ∂diskArea) =
       ∑' n : ℕ, ENNReal.ofReal (((n : ℝ)+1)*‖fourierCoeff f ((n+1 : ℕ) : ℤ)‖^2) := by
@@ -208,10 +208,10 @@ theorem pellerTwo : PellerObligation 2 := by
         Real.sqrt_sq hN0]
     exact ⟨by simpa only [one_mul] using hLower,hUpper,by rw [hHom,one_mul],by rw [hHom,one_mul]⟩
 
-/-- The complete frozen Theorem 1 contract specialized to p=2; the all-p theorem is supplied by PellerFoundations. -/
+/-- The complete Theorem 1 contract specialized to p=2; the all-p theorem is supplied by PellerFoundations. -/
 theorem besovClassificationTwo : BesovConclusion 2 := besovClassification 2 (by norm_num) pellerTwo
 
-/-- The corresponding coanalytic specialization, still only p=2. -/
+/-- The corresponding coanalytic specialization at p=2. -/
 theorem coanalyticBesovTwo : CoanalyticBesovConclusion 2 := coanalyticBesov 2 besovClassificationTwo
 
 end TTO.Paper.Proved

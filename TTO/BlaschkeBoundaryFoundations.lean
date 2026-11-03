@@ -592,7 +592,7 @@ theorem dyadic_nodeKernel_bessel (s : Finset ℕ) (c : ℕ → ℂ) :
 
 
 /-- The conjugation for one actual Blaschke factor fixes its normalized kernel
-up to precisely the frozen unimodular factor phase. -/
+up to precisely the unimodular factor phase. -/
 theorem conjugation_blaschkeBoundary_node (a : Disk) :
     conjugation (blaschkeBoundary a) (hardyNodeVector a).val =
       blaschkePhase a • (hardyNodeVector a).val := by

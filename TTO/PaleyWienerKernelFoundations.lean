@@ -104,7 +104,7 @@ theorem inner_intervalEvalKernel_gram (ℓ : ℝ) (hℓ : 0 < ℓ)
     exact_mod_cast Real.mul_self_sqrt (by norm_num : (0 : ℝ) ≤ 2)
   rw [hs]
 
-/-- The exact Cayley map used by the frozen PaleyWienerUnitary contract. -/
+/-- The exact Cayley map used by the PaleyWienerUnitary contract. -/
 def upperCayley (w : ℂ) : ℂ := (w - Complex.I) / (w + Complex.I)
 
 theorem upperCayley_den_ne_zero (w : ℂ) (hw : 0 < w.im) : w + Complex.I ≠ 0 := by
@@ -447,7 +447,7 @@ theorem exists_unitary_of_equal_gram_dense (p : I → E) (q : I → F)
 
 end DenseGramUnitary
 
-/-- The exact frozen Paley--Wiener formula follows from the two literal dense Gram families. -/
+/-- The exact Paley--Wiener formula follows from the two literal dense Gram families. -/
 theorem exists_paleyWienerUnitary (ℓ : ℝ) (hℓ : 0 < ℓ)
     (u : BoundaryLInf) (hu : IsInner u)
     (hval : ∀ z ∈ disk, innerValue u z = atomDiskFunction ℓ 0 z) :
@@ -650,7 +650,7 @@ theorem volterra_intervalEvalKernel_identity (ℓ : ℝ) (hℓ : 0 < ℓ)
   simp only [Complex.ofReal_zero, neg_zero, zero_mul, Complex.exp_zero]
   ring
 
-/-- The frozen PW formula is equivalently reproduction by the literal interval evaluation kernel. -/
+/-- The PW formula is equivalently reproduction by the literal interval evaluation kernel. -/
 theorem paleyWienerUnitary_eval (ℓ : ℝ) (u : BoundaryLInf)
     (U : IntervalL2 ℓ ≃ₗᵢ[ℂ] Model u) (hU : PaleyWienerUnitary u ℓ U)
     (f : IntervalL2 ℓ) (w : ℂ) (hw : 0 < w.im) :

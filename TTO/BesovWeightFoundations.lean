@@ -6,7 +6,7 @@ Authors: Patrick Lopatto
 module
 public import TTO.FiniteHankelRecoveryFoundations
 
-/-! Exact comparisons of physical and frozen Besov weights, preserving infinite energies. -/
+/-! Exact comparisons of physical and Besov weights, preserving infinite energies. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory

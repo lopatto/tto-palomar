@@ -128,7 +128,7 @@ theorem analytic_radial_circle_parseval (F : ℂ → ℂ) (hF : AnalyticOnNhd �
       rw [diskRadialCoeff,norm_mul,norm_pow,Complex.norm_real,Real.norm_of_nonneg hr,
         mul_pow,← pow_mul,Nat.mul_comm n 2]
 
-/-- The literal Taylor coefficients of the frozen analytic extension are exactly its original
+/-- The literal Taylor coefficients of the analytic extension are exactly its original
 nonnegative Fourier coefficients, for every L² boundary function without a Hardy restriction. -/
 theorem diskTaylorCoeff_analyticValue (f : BoundaryL2) (n : ℕ) :
     diskTaylorCoeff (analyticValue f) n = fourierCoeff f (n : ℤ) := by

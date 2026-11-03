@@ -406,7 +406,7 @@ theorem schattenWeakSubsequence : SchattenWeakSubsequenceObligation := by
   intro H _ _ _ p hp B T hT
   exact schatten_ball_subsequence p (by linarith) B T hT
 
-/-- Working one-atom reduction now supplies the proved arbitrary-Hilbert Schatten subsequence. -/
+/-- One-atom splitting using weak subsequences in Schatten balls on Hilbert spaces. -/
 theorem oneAtomSplitting_of_regularization_and_triangle (hT : TriangularBoundObligation)
     (hR : AtomicRegularizationObligation) (hN : SchattenNormLaws) : OneAtomConclusion :=
   oneAtomSplitting_of_regularization hT schattenWeakSubsequence hR hN

@@ -27,7 +27,7 @@ local instance : DecidableEq ι := Classical.decEq ι
 @[simp] theorem indexed_eval_apply (n : ι) (x : IndexedL2 ι) :
     lp.evalCLM ℂ (fun _ : ι => ℂ) 2 n x = x n := rfl
 
-/-- The frozen basis-vector condition determines every coordinate on native ℓ². -/
+/-- The basis-vector condition determines every coordinate on native ℓ². -/
 theorem indexedDiagonal_apply (w : ι → ℂ) (D : IndexedOperator ι)
     (hd : IndexedDiagonal w D) (x : IndexedL2 ι) (n : ι) : D x n = w n*x n := by
   classical

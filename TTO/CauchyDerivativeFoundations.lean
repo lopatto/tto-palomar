@@ -95,7 +95,7 @@ theorem bounded_derivativeSzegoKernel (w : Disk) : IsBounded (derivativeSzegoKer
   rw [derivativeSzegoKernel_eq_square]
   exact bounded_multiply (szegoInf w) _ (bounded_szegoKernel w)
 
-/-- The genuine derivative of the frozen analytic extension, with no Hardy premise on f. -/
+/-- The genuine derivative of the analytic extension, with no Hardy premise on f. -/
 theorem derivativeSzegoValue_backwardShift (f : BoundaryL2) (w : Disk) :
     derivativeSzegoValue (multiply (star coordinate) f) w.val=deriv (analyticValue f) w.val := by
   have hD : AnalyticOnNhd ℂ (deriv (analyticValue f)) disk :=

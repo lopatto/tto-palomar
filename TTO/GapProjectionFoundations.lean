@@ -14,7 +14,7 @@ open scoped ENNReal NNReal ComplexConjugate InnerProductSpace Topology
 namespace TTO.Paper.Proved
 open Reduction
 
-/-- The frozen Taylor-defined power model is the native model of its actual boundary factor. -/
+/-- The Taylor-defined power model is the native model of its actual boundary factor. -/
 theorem powerModel_eq_model (μ : Measure Boundary) (r : ℝ) (v : BoundaryLInf)
     (hTaylor : toL2 v = analyticBoundary (singularInnerValue μ r)) :
     powerModel μ r = model v := by
@@ -51,7 +51,7 @@ theorem star_hardy_zero_mem_negative (ψ : Hardy) (hψ : analyticValue ψ.val 0 
     · exact (mem_hardy_iff ψ.val).mp ψ.property _ (by omega)
   rw [fourierCoeff_star_L2, hc, map_zero]
 
-/-- The exact frozen canonical projection obligation, with all original manuscript hypotheses. -/
+/-- The exact canonical projection obligation, with all original manuscript hypotheses. -/
 theorem gapProjection : GapProjectionObligation := by
   intro u hu _hn μ hμ φ ψ hψ r hr _hr1
   obtain ⟨v, hv, hval, hTaylor⟩ := exists_fractionalSingularBoundary u hu μ hμ r hr

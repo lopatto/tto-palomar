@@ -119,7 +119,7 @@ theorem intervalKernelOperator_pairing_L1 (ℓ : ℝ) (K : ℝ → ℝ → ℂ)
       · simp only [indicator_of_notMem hs,intervalSmoothCompact_eq_zero hb hs,map_zero,mul_zero]
     _ = _ := integral_rawConvolution_correlation κ hκ ha hb
 
-/-- Only compact-interval continuity is used: a private L¹ cut is removed using actual correlation
+/-- Only compact-interval continuity is used: an auxiliary integrable cutoff is removed using actual correlation
 support. No global integrability premise appears in the exported physical pairing. -/
 theorem intervalKernelOperator_pairing_smooth (ℓ : ℝ) (K : ℝ → ℝ → ℂ)
     (hK : StronglyMeasurable (Function.uncurry K)) (M : ℝ) (hM : 0 ≤ M)

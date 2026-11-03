@@ -9,7 +9,7 @@ public import TTO.ContinuousVMOAFoundations
 public import Mathlib.MeasureTheory.Integral.Bochner.Set
 public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
-/-! Literal real-interval mean oscillation estimates for the frozen VMOA definition. -/
+/-! Literal real-interval mean oscillation estimates for the VMOA definition. -/
 @[expose] public section
 noncomputable section
 open Set Filter MeasureTheory

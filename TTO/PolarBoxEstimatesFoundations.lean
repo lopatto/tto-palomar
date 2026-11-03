@@ -375,7 +375,7 @@ theorem hardyWeightedOscillationEmbedding : HardyWeightedOscillationEmbedding :=
   hardyWeightedOscillationEmbedding_of_polar_boxes 32768 (by norm_num)
     (fun f B hB hMO => weightedPolarMeasure_polarBoxBound_oscillation f B hB hMO)
 
-/-- Genuine finite Hardy L¹ pairing estimate, with no remaining analytic proof parameter. -/
+/-- Finite Hardy L¹ pairing estimate. -/
 theorem finiteHardyL1OscillationEstimate : FiniteHardyL1OscillationEstimate :=
   finiteHardyL1OscillationEstimate_of_weighted_embedding hardyWeightedOscillationEmbedding
 

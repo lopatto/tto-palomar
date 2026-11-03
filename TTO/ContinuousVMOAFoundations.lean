@@ -117,7 +117,7 @@ theorem meanOscillation_le_of_continuous_comparison (f : BoundaryL2) (c : C(Boun
       mul_le_mul_of_nonneg_left hInt (inv_nonneg.mpr hd.le)
     _ = _ := by field_simp
 
-/-- An a.e. continuous Hardy boundary class lies in the frozen real-arc VMOA space. -/
+/-- An a.e. continuous Hardy boundary class lies in the real-arc VMOA space. -/
 theorem inVMOA_of_continuous_ae (f : BoundaryL2) (hf : f ∈ hardy)
     (c : C(Boundary,ℂ)) (hfc : f =ᵐ[circleMeasure] c) : InVMOA f := by
   refine ⟨hf,?_⟩

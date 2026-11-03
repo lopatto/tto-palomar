@@ -832,7 +832,7 @@ theorem idealCarriers : IdealCarriers where
     fun _ hA L R => (hA.comp_clm R).clm_comp L,fun _ => Iff.rfl⟩
   finiteRank u := ⟨finiteRankIdeal (Model u),finiteRankIdeal_twoSided u,fun _ => Iff.rfl⟩
 
-/-- The specialized gap conclusion no longer carries an unresolved ideal-carrier input. -/
+/-- Gap classification using the ideal closure laws. -/
 theorem gapSpecializations (h : FiniteCompressionObligation) : GapSpecializationsConclusion :=
   Reduction.gapSpecializations h idealCarriers
 
@@ -872,7 +872,7 @@ theorem unitaryIdealLaws : UnitaryIdealLaws where
 
 /-! Native Hardy evaluation. The geometric-series and Riesz-kernel proof route adapts the
 Apache-2.0 Tau Ceti Hardy DiskFunction/ReproducingKernel files at the recorded revision;
-all definitions here use the frozen analyticValue and the native full Fourier basis. -/
+all definitions here use analyticValue and the native full Fourier basis. -/
 section HardyEvaluation
 
 /-- Each coefficient is bounded using the full native Fourier isometry. -/
@@ -880,7 +880,7 @@ theorem norm_fourierCoeff_le (f : BoundaryL2) (n : ℤ) : ‖fourierCoeff f n‖
   rw [← fourierBasis_repr]
   exact (lp.norm_apply_le_norm (by norm_num) (fourierBasis.repr f) n).trans_eq (fourierBasis.repr.norm_map f)
 
-/-- The frozen coefficient series converges absolutely at every point of the open disk. -/
+/-- The coefficient series converges absolutely at every point of the open disk. -/
 theorem summable_norm_analyticValue (f : BoundaryL2) {z : ℂ} (hz : ‖z‖ < 1) :
     Summable (fun n : ℕ => ‖fourierCoeff f (n : ℤ) * z^n‖) := by
   refine Summable.of_nonneg_of_le (fun _ => norm_nonneg _) (fun n => ?_)
@@ -992,7 +992,7 @@ theorem norm_analyticValue_hardy_le (f : Hardy) (w : Disk) :
   simpa only [hardyEvaluation_apply,norm_hardyEvaluation,div_eq_mul_inv,mul_comm] using
     (hardyEvaluation w).le_opNorm f
 
-/-- The literal Fourier coefficient series of the frozen analyticValue. -/
+/-- The literal Fourier coefficient series of analyticValue. -/
 def analyticSeries (f : BoundaryL2) : FormalMultilinearSeries ℂ ℂ ℂ :=
   FormalMultilinearSeries.ofScalars ℂ (fun n : ℕ => fourierCoeff f (n : ℤ))
 
@@ -1002,7 +1002,7 @@ theorem one_le_radius_analyticSeries (f : BoundaryL2) : 1 ≤ (analyticSeries f)
     exact norm_fourierCoeff_le f n
   simpa using h
 
-/-- The frozen series is an actual analytic power series throughout the open disk. -/
+/-- The series is an actual analytic power series throughout the open disk. -/
 theorem hasFPowerSeriesOnBall_analyticValue (f : BoundaryL2) :
     HasFPowerSeriesOnBall (analyticValue f) (analyticSeries f) 0 1 := by
   have h := ((analyticSeries f).hasFPowerSeriesOnBall
@@ -1303,7 +1303,7 @@ theorem modelKernelVector_mem (u : BoundaryLInf) (hu : IsInner u) (w : Disk) :
   | add x y hx hy hx' hy' => rw [inner_add_right,hx',hy',add_zero]
   | smul c x hx hx' => rw [inner_smul_right,hx',mul_zero]
 
-/-- The model's Riesz kernel as an actual member of its frozen native submodule. -/
+/-- The model's Riesz kernel as an actual member of its native submodule. -/
 def modelReproducingKernel (u : BoundaryLInf) (hu : IsInner u) (w : Disk) : Model u :=
   ⟨modelKernelVector u w,modelKernelVector_mem u hu w⟩
 
@@ -1560,7 +1560,7 @@ theorem dualSynthesis_coord (R : SequenceL2 ≃L[ℂ] H) (f : H) (n : ℕ) :
   simpa [lp.inner_single_left,RCLike.inner_apply] using
     ContinuousLinearMap.adjoint_inner_right R.toContinuousLinearMap (lp.single 2 n (1 : ℂ)) f
 
-/-- The frozen basis-vector diagonal predicate determines all pointwise coordinates. -/
+/-- The basis-vector diagonal predicate determines all pointwise coordinates. -/
 theorem diagonal_apply (w : ℕ → ℂ) (D : SequenceOperator) (hd : Diagonal w D) (x : SequenceL2) (n : ℕ) :
     D x n = w n*x n := by
   let F : SequenceL2 →L[ℂ] ℂ := innerSL ℂ (lp.single 2 n (1 : ℂ)) ∘L D
@@ -2395,7 +2395,7 @@ theorem coordinate_unimodular : ∀ᵐ t ∂circleMeasure, ‖coordinate t‖ = 
   filter_upwards [coordinate_ae] with t ht
   simp [ht,fourier_apply]
 
-/-- The frozen boundary conjugation is the actual u·bar(z)·bar(f). -/
+/-- The boundary conjugation is the actual u·bar(z)·bar(f). -/
 theorem conjugation_ae (u : BoundaryLInf) (f : BoundaryL2) :
     conjugation u f =ᵐ[circleMeasure] fun t => u t*conj (fourier (T := 1) 1 t)*conj (f t) := by
   filter_upwards [multiply_ae u (multiply (star coordinate) (star f)),
@@ -3026,7 +3026,7 @@ theorem analyticTTO_modelPolynomial_value (u : BoundaryLInf) (hu : IsInner u) (�
   simp only [map_smul,hz,smul_zero,Finset.sum_const_zero,sub_zero]
   exact congrArg (model u).orthogonalProjectionOnto (coreMultiply_fourierBasis φ.val (n : ℤ))
 
-/-- The frozen transformed Hankel symbol is exactly bar(u)·φ, with no finite-rank error. -/
+/-- The transformed Hankel symbol is exactly bar(u)·φ, with no finite-rank error. -/
 theorem hankelSymbol_eq (u : BoundaryLInf) (φ : BoundaryL2) :
     hankelSymbol u φ = multiply (star u) φ := by
   unfold hankelSymbol conjugation
@@ -3886,7 +3886,7 @@ theorem coreValue_iff_projection (u : BoundaryLInf) (hu : IsInner u) (σ : Bound
     exact (coreForm_eq_inner_left σ f.val g.val hf).symm
 
 
-/-- The frozen Holder fold has precisely the ordinary pointwise finite product representative. -/
+/-- The Holder fold has precisely the ordinary pointwise finite product representative. -/
 theorem listProduct_ae (l : List BoundaryLInf) :
     l.foldr multiplyInf (constLInf 1) =ᵐ[circleMeasure] fun t => (l.map (fun a => a t)).prod := by
   induction l with
@@ -6574,7 +6574,7 @@ theorem coronaStructure (hCo : CoronaWitnessObligation) : CoronaStructureObligat
   obtain ⟨E,hE,hcomp,hrange,_hcoord,hunique⟩ := hedata
   exact ⟨E,hE,hcomp,hrange,hunique⟩
 
-/-- The interpolating reduction now requires only the interpolation-to-Riesz existence proof. -/
+/-- Interpolating-symbol classification from normalized-kernel Riesz synthesis. -/
 theorem interpolatingClassification (hR : RieszObligation) : InterpolatingConclusion :=
   Reduction.interpolatingClassification hR dualDiagonal diagonalLaws idealLaws
 
@@ -6583,7 +6583,7 @@ theorem perturbedKernelBasisClassification (hL : AnalyticLiftObligation)
     (hK : KernelRemainderObligation) : PerturbedBasisConclusion :=
   Reduction.perturbedKernelBasisClassification coreLaws hL hK diagonalLaws idealLaws
 
-/-- The finite-atom reduction now supplies actual compression and uniform vector gluing. -/
+/-- Finite-atom classification using compression and uniform vector gluing. -/
 theorem finiteAtomClassification (hS : CoronaStructureObligation) (hD : DistinctAtomCoronaObligation)
     (hOne : OneAtomObligation) (hDim : SingleAtomDimensionObligation)
     (hAng : AngularUniquenessObligation) (hN : SchattenNormLaws) : FiniteAtomConclusion :=
